@@ -32,14 +32,16 @@ class QuizzProvider extends ChangeNotifier {
   }
 
   nextQuestion(bool answer) {
+    _currentQuestionIndex++;
     if (answerIsCorrect(answer)) _score += 10;
     addIconToScorKeeper(answer);
-    _currentQuestionIndex++;
     notifyListeners();
   }
 
   reset() {
     _currentQuestionIndex = 0;
+    _score = 0;
+    scoreKeeper = [];
     notifyListeners();
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:quizz_app_using_privider/data/quizz_questions.dart';
-import 'package:quizz_app_using_privider/service/quizz_service.dart';
+
+import '../provider/quizz_provider.dart';
 
 
 class QuizzResult extends StatefulWidget{
@@ -34,6 +36,8 @@ class _QuizzResultState extends State<QuizzResult> {
 
   @override
   Widget build(BuildContext context) {
+    final _quizzProvider = Provider.of<QuizzProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Résultat"),
@@ -59,6 +63,7 @@ class _QuizzResultState extends State<QuizzResult> {
                 ),
               ),
               onPressed: () {
+                _quizzProvider.reset();
                 Navigator.pop(context);
               },
               

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quizz_app_using_privider/provider/quizz_provider.dart';
 import 'result.dart';
-import 'package:quizz_app_using_privider/service/quizz_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class QuizzPage extends StatefulWidget {
@@ -80,15 +79,15 @@ class _QuizzPageState extends State<QuizzPage>
                   ),
                 ),
                 onPressed: () {
-                  if(_quizzProvider.indexLessThanLength()){
+                  if (_quizzProvider.indexLessThanLength()) {
                     _quizzProvider.nextQuestion(true);
-                  }else{
+                  } else {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => QuizzResult(score: _quizzProvider.score)));
+                            builder: (context) =>
+                                QuizzResult(score: _quizzProvider.score)));
                   }
-
                 },
               ),
             ),
@@ -107,13 +106,14 @@ class _QuizzPageState extends State<QuizzPage>
                   ),
                 ),
                 onPressed: () {
-                  if(_quizzProvider.indexLessThanLength()){
+                  if (_quizzProvider.indexLessThanLength()) {
                     _quizzProvider.nextQuestion(false);
-                  }else{
-                     Navigator.pushReplacement(
+                  } else {
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => QuizzResult(score: _quizzProvider.score)));
+                            builder: (context) =>
+                                QuizzResult(score: _quizzProvider.score)));
                   }
                 },
               ),
