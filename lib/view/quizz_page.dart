@@ -83,7 +83,6 @@ class _QuizzPageState extends State<QuizzPage>
                   if(_quizzCubit.indexLessThanLength()){
                     _quizzCubit.nextQuestion(true);
                   }else{
-                    _quizzCubit.reset();
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -112,7 +111,6 @@ class _QuizzPageState extends State<QuizzPage>
                     _quizzCubit.nextQuestion(false);
                     print(_quizzCubit.score);
                   }else{
-                    _quizzCubit.reset();
                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
