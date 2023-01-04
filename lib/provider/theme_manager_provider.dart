@@ -25,6 +25,6 @@ class ThemeManagerProvider extends ChangeNotifier {
       print("Light mode applid");
       _themeData = lightTheme;
       notifyListeners();
-    }  
+    }
   }
 }

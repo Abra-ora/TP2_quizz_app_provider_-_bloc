@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quizz_app_using_privider/data/quizz_questions.dart';
-import 'package:quizz_app_using_privider/service/quizz_service.dart';
 
 
 class QuizzResult extends StatefulWidget{

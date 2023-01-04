@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quizz_app_using_privider/provider/quizz_provider.dart';
+import 'package:quizz_app_using_privider/cubit/cubit/quizz_cubit.dart';
 import 'result.dart';
-import 'package:quizz_app_using_privider/service/quizz_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class QuizzPage extends StatefulWidget {
@@ -18,7 +17,8 @@ class _QuizzPageState extends State<QuizzPage>
 
   @override
   Widget build(BuildContext context) {
-    final _quizzProvider = Provider.of<QuizzProvider>(context);
+
+    final _quizzCubit = Provider.of<QuizzCubit>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -40,7 +40,7 @@ class _QuizzPageState extends State<QuizzPage>
                   // child: Row(
                   children: [
                     Text(
-                      _quizzProvider.getCurrentQuestion().questionText,
+                      _quizzCubit.getCurrentQuestion().questionText,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 20.0,
@@ -51,7 +51,7 @@ class _QuizzPageState extends State<QuizzPage>
                     ),
                     CachedNetworkImage(
                       imageUrl:
-                          _quizzProvider.getCurrentQuestion().questionImage,
+                          _quizzCubit.getCurrentQuestion().questionImage,
                       placeholder: (context, url) =>
                           const CircularProgressIndicator(),
                       errorWidget: (context, url, error) =>
@@ -80,13 +80,14 @@ class _QuizzPageState extends State<QuizzPage>
                   ),
                 ),
                 onPressed: () {
-                  if(_quizzProvider.indexLessThanLength()){
-                    _quizzProvider.nextQuestion(true);
+                  if(_quizzCubit.indexLessThanLength()){
+                    _quizzCubit.nextQuestion(true);
                   }else{
+                    _quizzCubit.reset();
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => QuizzResult(score: _quizzProvider.score)));
+                            builder: (context) => QuizzResult(score: _quizzCubit.score)));
                   }
 
                 },
@@ -107,13 +108,15 @@ class _QuizzPageState extends State<QuizzPage>
                   ),
                 ),
                 onPressed: () {
-                  if(_quizzProvider.indexLessThanLength()){
-                    _quizzProvider.nextQuestion(false);
+                  if(_quizzCubit.indexLessThanLength()){
+                    _quizzCubit.nextQuestion(false);
+                    print(_quizzCubit.score);
                   }else{
+                    _quizzCubit.reset();
                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => QuizzResult(score: _quizzProvider.score)));
+                            builder: (context) => QuizzResult(score: _quizzCubit.score)));
                   }
                 },
               ),
@@ -121,7 +124,7 @@ class _QuizzPageState extends State<QuizzPage>
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: _quizzProvider.scoreKeeper,
+            children: _quizzCubit.scoreKeeper,
           ),
         ],
       ),
