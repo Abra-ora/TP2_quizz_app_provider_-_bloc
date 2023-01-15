@@ -1,10 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-
 import '../../data/quizz_questions.dart';
 import '../../model/question.dart';
-
 part 'quizz_state.dart';
 
 class QuizzCubit extends Cubit<QuizzCubitInitial> {
